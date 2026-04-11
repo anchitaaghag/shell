@@ -45,7 +45,7 @@ ls ./data/raw
 # Used Bash Cheat Sheet to create multiple directories at once with -p flag
 # Resource Link: https://github.com/RehanSaeed/Bash-Cheat-Sheet
 
-mkdir -p .data/processed/{server_logs,user_logs,event_logs}
+mkdir -p ./data/processed/{server_logs,user_logs,event_logs}
 
 # 5. Copy all server log files (files with "server" in the name AND a .log extension) from ./data/raw to ./data/processed/server_logs
 
@@ -58,17 +58,20 @@ cp ./data/raw/*event*.log ./data/processed/event_logs
 
 # 7. For user privacy, remove all files containing IP addresses (files with "ipaddr" in the filename) from ./data/raw and ./data/processed/user_logs
 
-rm ./data/raw/*ipaddr*.* 
-rm ./data/processed/user_logs*ipaddr*.* 
+#rm ./data/raw/*ipaddr* 
+#rm ./data/processed/user_logs/*ipaddr*
+
+find ./data/raw/ -type f -name "*ipaddr*.txt\|*ipaddr*.log" -delete
+find ./data/processed/user_logs/ -type f -name "*ipaddr*.txt\|*ipaddr*.log" -delete
 
 # 8. Create a file named ./data/inventory.txt that lists all the files in the subfolders of ./data/processed
 
-touch .data/inventory.txt
+touch ./data/inventory.txt
 
 # Used Bash Cheat Sheet to find all files (f type) in the path
 # Resource Link: https://github.com/RehanSaeed/Bash-Cheat-Sheet
 
-find ./data/processed -type f > .data/inventory.txt
+find ./data/processed -type f > ./data/inventory.txt
 
 ###########################################
 
